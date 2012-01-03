@@ -1,0 +1,42 @@
+package com.natixis.crm.security;
+
+import java.util.Hashtable;
+
+import javax.naming.Context;
+import javax.naming.Name;
+import javax.naming.NamingException;
+
+import com.mchange.v2.c3p0.ComboPooledDataSource;
+
+
+
+public class BackupC3p0EncryptedFactory extends org.apache.naming.factory.BeanFactory {
+
+	static final String secretKeyUser = "113513ààç_çà6d43861f";
+	static final String secretKeyPassword = "àè_çè&é&_'(=çà)àçksjdfmino216f16d43861f";
+
+	@SuppressWarnings("rawtypes")
+	@Override
+	public Object getObjectInstance(Object obj, Name name, Context nameCtx, Hashtable environment) throws NamingException {
+		Object o = super.getObjectInstance(obj, name, nameCtx, environment);
+		if (o != null && o instanceof ComboPooledDataSource) {
+			ComboPooledDataSource ds = (ComboPooledDataSource) o;
+			String cryptedUsername = ds.getUser();
+			String cryptedPassword = ds.getPassword();
+			if (cryptedPassword != null && cryptedPassword.length() > 0) {
+				String pwd = EncryptHelper.decryptData(secretKeyPassword, cryptedPassword);
+				ds.setPassword(pwd);
+			}
+			if (cryptedUsername != null && cryptedUsername.length() > 0) {
+				String username = EncryptHelper.decryptData(secretKeyUser, cryptedUsername);
+				ds.setUser(username);
+			}
+			System.out.println("Initialisation de la datasource JNDI : OK");
+			return ds;
+		} else {
+			System.out.println("Initialisation de la datasource JNDI : KO");
+			return null;
+		}
+	}
+
+}

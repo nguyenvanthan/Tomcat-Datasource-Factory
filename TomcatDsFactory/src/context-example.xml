@@ -1,0 +1,17 @@
+
+	 <!-- ici il faut au moins adapter les valeurs : username, password, driverClassName et url -->
+
+      <Resource name="jdbc/mydatabase"
+            auth="Container" type="javax.sql.DataSource"
+            factory="fr.cnvt.tomcat.Tomcat7EncryptedFactory"
+            username="sD20tsCeFQPP3HuQV17yXw==" 
+            password="LoPCUiDWD47S6wIOTZWvBX7X9XTLt2vS9Sv52csoEGo="
+            driverClassName="my.driver.class"
+            url="my.jdbc.url"
+            initialSize="0" maxActive="20" minIdle="5" maxIdle="10"
+            validationQuery="SELECT 1 FROM Dual" validationQueryTimeout="300"
+            maxWait="30000"
+            removeAbandoned="true" removeAbandonedTimeout="600" logAbandoned="true"   
+            timeBetweenEvictionRunsMillis="20000" 
+            testWhileIdle="true"      
+            connectionProperties="CHARSET=utf8;" />
