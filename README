@@ -1,0 +1,31 @@
+Projet Tomcat Datasource Factory.
+
+Allow to configure a JNDI datasource in Tomcat with crypted username and crypted password.
+
+To generate the crypted username and password, you can run the Junit test in fr.cnvt.tomcat.TestEncryptHelper.
+You have juste to replace the login and password variables before ^_^.
+
+And to configure your JNDI datasource, you can do like this following snippet:
+
+<Resource name="jdbc/mydatabase"
+            auth="Container" type="javax.sql.DataSource"
+            factory="fr.cnvt.tomcat.Tomcat7EncryptedFactory"
+            username="yourcryptedusername"
+            password="yourcryptedpassword"
+            driverClassName="my.driver.class"
+            url="my.jdbc.url"
+            initialSize="0" maxActive="20" minIdle="5" maxIdle="10" />
+			
+			
+Example here : https://github.com/nguyenvanthan/Tomcat-Datasource-Factory/blob/master/TomcatDsFactory/src/context-example.xml
+
+All the others factories are available in the package fr.cnvt.tomcat
+			
+Enjoy ^_^
+
+			
+Developper Team:
+- Christian NGUYEN VAN THAN (i'm alone ... XD)
+
+
+
