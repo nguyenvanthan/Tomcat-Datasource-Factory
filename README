@@ -5,6 +5,8 @@ Allow to configure a JNDI datasource in Tomcat with crypted username and crypted
 To generate the crypted username and password, you can run the Junit test in fr.cnvt.tomcat.TestEncryptHelper.
 You have juste to replace the login and password variables before ^_^.
 
+Dependencies libs has been added in "lib" folder.
+
 And to configure your JNDI datasource, you can do like this following snippet:
 
 <Resource name="jdbc/mydatabase"
